@@ -33,23 +33,6 @@ export default function DashboardPage() {
         );
 
     const navigate = useNavigate();
-
-
-    const fetchReminders =
-        async () => {
-            try {
-            const response =
-                await api.get(
-                "/tasks/reminders"
-                );
-
-            setReminders(
-                response.data
-            );
-            } catch (error) {
-            console.error(error);
-            }
-        };
             
     const [stats, setStats] = useState({
         totalTasks: 0,
