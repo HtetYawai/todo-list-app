@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Status {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  createdAt DateTime @default(now())
+
+  tasks         Task[] @relation("Owner")
+  assignedTasks Task[] @relation("Assigned")
+
+  categories Category[]
+
+  ownerCollaborations        Collaboration[] @relation("OwnerCollaborations")
+  collaboratorCollaborations Collaboration[] @relation("CollaboratorCollaborations")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  tasks Task[]
+
+  @@unique([userId, name])
+}
+
+model Task {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+
+  status Status @default(PENDING)
+
+  dueDate    DateTime?
+  reminderAt DateTime?
+
+  reminded Boolean @default(false)
+
+  ownerId Int
+  owner   User @relation("Owner", fields: [ownerId], references: [id])
+
+  assignedToId Int?
+  assignedTo   User? @relation("Assigned", fields: [assignedToId], references: [id])
+
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Collaboration {
+  id Int @id @default(autoincrement())
+
+  ownerId Int
+  owner   User @relation("OwnerCollaborations", fields: [ownerId], references: [id])
+
+  collaboratorId Int
+  collaborator   User @relation("CollaboratorCollaborations", fields: [collaboratorId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([ownerId, collaboratorId])
+}
