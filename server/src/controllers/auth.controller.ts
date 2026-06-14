@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 
-import { prisma } from "../lib/prisma";
-import { generateToken } from "../utils/jwt";
+import { prisma } from "../lib/prisma.js";
+import { generateToken } from "../utils/jwt.js";
 
 export const register = async (
   req: Request,

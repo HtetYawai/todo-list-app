@@ -4,10 +4,10 @@ import {
   register,
   login,
   getCurrentUser,
-} from "../controllers/auth.controller";
+} from "../controllers/auth.controller.js";
 
 import { authMiddleware }
-  from "../middleware/auth.middleware";
+  from "../middleware/auth.middleware.js";
 
 const router = Router();
 

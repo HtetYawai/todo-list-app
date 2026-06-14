@@ -1,43 +1,16 @@
 import { Router } from "express";
-import {
-  createTask,
-  getTasks,
-  getAssignedTasks,
-  updateTask,
-  deleteTask,
-  getDashboardStats,
-  getRecentTasks,
-  getUpcomingReminders,
-  markReminderTriggered,
-  getPendingReminders
-} from "../controllers/task.controller.js";
+import { createTask, getTasks, getAssignedTasks, updateTask, deleteTask, getDashboardStats, getRecentTasks, getUpcomingReminders, markReminderTriggered, getPendingReminders } from "../controllers/task.controller.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
-
 const router = Router();
-
 router.use(authMiddleware);
-
 router.post("/", createTask);
-
 router.get("/", getTasks);
-
 router.get("/dashboard", getDashboardStats);
-
 router.get("/recent", getRecentTasks);
-
 router.get("/assigned", getAssignedTasks);
-
 router.get("/reminders", getUpcomingReminders);
-
 router.get("/pending-reminders", getPendingReminders);
-
 router.patch("/:id", updateTask);
-
 router.delete("/:id", deleteTask);
-
-router.patch(
-  "/:id/reminded",
-  markReminderTriggered
-);
-
+router.patch("/:id/reminded", markReminderTriggered);
 export default router;

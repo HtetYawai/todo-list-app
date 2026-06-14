@@ -4,10 +4,10 @@ import {
   addCollaborator,
   getCollaborators,
   removeCollaborator,
-} from "../controllers/collaboration.controller";
+} from "../controllers/collaboration.controller.js";
 
 import { authMiddleware }
-  from "../middleware/auth.middleware";
+  from "../middleware/auth.middleware.js";
 
 const router = Router();
 
