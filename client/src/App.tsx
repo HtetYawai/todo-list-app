@@ -11,7 +11,7 @@ import DashboardPage from "./pages/DashboardPage";
 import TasksPage from "./pages/TasksPage";
 import CollaboratorsPage from "./pages/CollaboratorsPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
-import ReminderWatcher from "./components/ReminderWatcher";
+// import ReminderWatcher from "./components/ReminderWatcher";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -22,9 +22,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Navigate to="/login" />
-          }
+          element={<LoginPage />}
         />
 
         <Route
