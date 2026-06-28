@@ -18,7 +18,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 function App() {
   return (
     <BrowserRouter>
-    <ReminderWatcher />
+    {/* <ReminderWatcher /> */}
       <Routes>
         <Route
           path="/"
